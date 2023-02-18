@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Default: Open current directory in file manager
+if [ -z "$1" ]; then
+    xdg-open .
+    exit
+fi
+
+# Check if xdg-open is installed
+if ! command -v xdg-open &> /dev/null; then
+    echo "Error: xdg-open is not installed."
+    exit 1
+fi
+
+# Open directory in file manager
+if [ -d "$1" ]; then
+    xdg-open "$1"
+    exit
+fi
+
+# Check file type and open with appropriate application
+case "$1" in
+    *.txt|*.md|*.sh|*.py|*.c|*.cpp|*.h|*.hpp|*.html|*.htm|*.rst|*.tex)
+        xdg-open "$1"
+        ;;
+    *.pdf)
+        xdg-open "$1"
+        ;;
+    *.jpg|*.jpeg|*.png|*.gif|*.bmp)
+        xdg-open "$1"
+        ;;
+    *.mp4|*.mkv|*.avi|*.flv|*.mov|*.wmv|*.mpg)
+        xdg-open "$1"
+        ;;
+    *.mp3|*.wav|*.flac|*.aac)
+        xdg-open "$1"
+        ;;
+    *)
+        echo "Error: Unsupported file type."
+        exit 1
+        ;;
+esac
