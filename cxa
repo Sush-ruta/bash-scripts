@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Check if any files are given as arguments
+if [ -z "$*" ]; then
+  echo "Please provide one or more file names."
+  exit 1
+fi
+
+# Loop through all files given as arguments using $*[^1^][1] [^2^][4]
+for file in $*; do
+  # Check if the file exists
+  if [ ! -e "$file" ]; then
+    echo "File $file does not exist. Skipping."
+    continue
+  fi
+
+  # Make the file executable using chmod command[^3^][2] [^4^][3]
+  chmod +x "$file"
+  echo "File $file is now executable."
+done
+
+exit 0

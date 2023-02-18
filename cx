@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if a file is given as an argument
+if [ -z "$1" ]; then
+  echo "Please provide a file name."
+  exit 1
+fi
+
+# Check if the file exists
+if [ ! -e "$1" ]; then
+  echo "File $1 does not exist."
+  exit 2
+fi
+
+# Check if the file is executable using -x flag[^1^][1] [^2^][3]
+if [ -x "$1" ]; then
+  # Make the file not executable using chmod command[^3^][6] [^4^][7]
+  chmod -x "$1"
+  echo "File $1 is now not executable."
+else
+  # Make the file executable using chmod command[^3^][6] [^4^][7]
+  chmod +x "$1"
+  echo "File $1 is now executable."
+fi
+
+exit 0
